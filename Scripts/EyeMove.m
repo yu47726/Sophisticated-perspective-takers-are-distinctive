@@ -88,7 +88,7 @@ for pair = 1:length(SubPair)
     ISD_x{pair,1} = 1-corr(cell2mat(raw_data1(:,1)),cell2mat(raw_data2(:,1)));
     ISD_y{pair,1} = 1-corr(cell2mat(raw_data1(:,2)),cell2mat(raw_data2(:,2)));
     
-    ISD_mean{pair,1} = mean([ISD_x{pair,1},ISD_x{pair,1}]);
+    ISD_mean{pair,1} = mean([ISD_x{pair,1},ISD_y{pair,1}]);
        
     fprintf(['\n \\ ',PairNam{pair},' done. /\n\n']);
 end
