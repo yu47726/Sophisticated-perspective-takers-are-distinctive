@@ -1,7 +1,7 @@
 clear,clc;
 %%
 load('E:\Cartoon\EyeMove\Data\EyeMoveData.mat');
-RawData = filled_data;
+RawData = Data;
 subnum=[1:41];
 SubPair = nchoosek(subnum,2);
 for i = 1:length(SubPair)

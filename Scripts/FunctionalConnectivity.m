@@ -1,15 +1,10 @@
 clear;clc;
 %%
-RawPath = 'E:\Cartoon\Network\xtrData';
-MatName = 'TRBOLD.mat';
-
+RawPath = 'E:\Cartoon\...\NetworkBoldData.mat';
+load(RawPath);
 Network = {'MTN','Pain'};
-for i =1:length(Network)
-    load(fullfile(RawPath,Network{i},MatName));
-    NetworkBoldData{i} = TRBoldData;
-end
-
 subnum = 55;
+
 %% Calculate within-network correlation for each subject
 for sub = 1:subnum
     for net = 1:length(NetworkBoldData)
@@ -21,7 +16,6 @@ for sub = 1:subnum
                 [r{sub,1}{net,1}(com,1),p{sub,1}{net,1}(com,1)]=corr(x,y,'type','pearson');
         end
         fisher_z{sub,1}{net,1} = atanh(r{sub,1}{net,1}); 
-        fisher_z_mean{sub,1}(net,1) = mean(fisher_z{sub,1}{net,1});
     end
 end
 fprintf('\n   Calculate within-network correlation Done!   \n');

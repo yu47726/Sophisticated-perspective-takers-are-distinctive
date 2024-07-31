@@ -3,8 +3,16 @@ This repository hosts all of the data and code for "Sophisticated perspective-ta
 ## Data files
 PT_fmri.csv: Perspective-taking scores of fMRI participants.
 PT_EyeMove.csv: Perspective-taking scores of participants in the eye movement experiment.
+
+PT_Verbal.csv: Perspective-taking scores of participants in the verbal interpretation analyses.
+
 NetworkBoldData.mat: Data containing the preprocessed time series extracted from regions in the mentalizing network and pain network.
+
+RestBoldData.mat: Data containing the preprocessed time series extracted from regions in the mentalizing network during resting-state.
+
 EyeMoveData.mat: Data containing the preprocessed eye-gaze trajectory data.
+
+TextDissimilarity_matrix.mat: Data containing matrix for the inter-subject dissimilarity of the verbal interpretation.
 
 ## Scripts files
 TimeDynamic.m: Calculation of inter-subject dissimilarity of time dynamics.

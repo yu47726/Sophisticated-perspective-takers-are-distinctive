@@ -1,25 +1,19 @@
 clear;clc;
 %%
-RawPath = 'E:\Cartoon\Network\xtrData';
-MatName = 'TRBOLD.mat';
+RawPath = 'E:\Cartoon\...\NetworkBoldData.mat';
+load(RawPath);
 Network = {'MTN','Pain'};
-for i =1:length(Network)
-    load(fullfile(RawPath,Network{i},MatName));
-    NetworkBoldData{i} = TRBoldData;
-end
-
 subnum = 55;
-subnam = [1:55]';
 
 %% Calculate strength centrality
 for net = 1:length(NetworkBoldData)
-    for sub =1:length(subnam)
+    for sub =1:subnum
         for roi1 = 1:length(NetworkBoldData{net})
             RoiNam = [1:length(NetworkBoldData{net})];
             RoiNam(roi1) = []; %delete given ROI num for getting other ROIs
             for roi2 = 1:length(NetworkBoldData{net})-1
-                x = NetworkBoldData{net}{roi1}(subnam(sub),:)';
-                y = NetworkBoldData{net}{RoiNam(roi2)}(subnam(sub),:)';
+                x = NetworkBoldData{net}{roi1}(sub,:)';
+                y = NetworkBoldData{net}{RoiNam(roi2)}(sub,:)';
                 [r{net}{sub,1}{roi1,1}(roi2,1),p{net}{sub,1}{roi1,1}(roi2,1)] = corr(x,y,'Type','pearson','Rows','complete');
             end
             fisher_z{net}{sub,1}{roi1,1} = atanh(r{net}{sub,1}{roi1,1});
