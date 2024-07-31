@@ -1,7 +1,7 @@
 This repository hosts all of the data and code for "Sophisticated perspective-takers are distinctive: neural idiosyncrasy of functional connectivity in the mentalizing network" by Yu Zhang, Chao Ma, Haiming Li, Leonardo Assumpção, Yi Liu
 
 ## Data files
-PT_fmri.csv: Perspective-taking scores of fMRI participants.
+PT_fMRI.csv: Perspective-taking scores of fMRI participants.
 PT_EyeMove.csv: Perspective-taking scores of participants in the eye movement experiment.
 
 PT_Verbal.csv: Perspective-taking scores of participants in the verbal interpretation analyses.
