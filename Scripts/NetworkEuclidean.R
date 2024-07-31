@@ -37,8 +37,8 @@ Euc_dyad_double <- rbind(Euc_dyad, Euc_dyad_2)
 library(emmeans)
 library(lmerTest)
 
-emm_options(pbkrtest.limit = 3080)
-emm_options(lmerTest.limit = 3080)
+emm_options(pbkrtest.limit = 3000)
+emm_options(lmerTest.limit = 3000)
 
 md <- lmer(scale(Euc) ~ dyad_PT_binary + (1 | sub1) + (1 | sub2), data = Euc_dyad_double)
 emm_md <- emmeans(md, ~ dyad_PT_binary, contr = Contrasts, adjust = "none")
