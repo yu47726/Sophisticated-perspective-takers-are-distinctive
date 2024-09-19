@@ -1,6 +1,6 @@
 clear,clc;
 %%
-load('E:\Cartoon\EyeMove\Data\EyeMoveData.mat');
+load('\...\EyeMoveData.mat');
 RawData = Data;
 subnum=[1:41];
 SubPair = nchoosek(subnum,2);
@@ -41,6 +41,7 @@ for pair = 1:length(SubPair)
         end
     end
     
+    
     % second of pair
     raw_data2 = RawData{SubPair(pair,2)};
     Index_row2 = [];
@@ -70,19 +71,10 @@ for pair = 1:length(SubPair)
         end
     end
     
-    Index_row_null{pair,1} = Index_row1; Index_row_null{pair,2} = Index_row2;
-    hori_pos_null{pair,1} = hori_pos1; hori_pos_null{pair,2} = hori_pos2;
-    verti_pos_null{pair,1} = verti_pos1; verti_pos_null{pair,2} = verti_pos2;
-    
-    EyeBlink{pair,1}  = [Index_row1;Index_row2];
-    verti_Null{pair,1}  = [hori_pos1;hori_pos2];
-    hori_Null{pair,1}  = [verti_pos1;verti_pos2];
-    Null_Row{pair,1}  = [Index_row1;Index_row2;verti_pos1;verti_pos2;hori_pos1;hori_pos2]; 
-    
+    % delete the data out of defined range
+    Null_Row{pair,1}  = [Index_row1;Index_row2;verti_pos1;verti_pos2;hori_pos1;hori_pos2];    
     raw_data1(Null_Row{pair,1},:) = [];
     raw_data2(Null_Row{pair,1},:) = [];
-    pair1_data{pair,1} = raw_data1;
-    pair2_data{pair,1} = raw_data2;
     
     % inter-subject dissimilarity of eye-gaze trajectories
     ISD_x{pair,1} = 1-corr(cell2mat(raw_data1(:,1)),cell2mat(raw_data2(:,1)));

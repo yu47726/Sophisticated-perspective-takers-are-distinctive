@@ -1,9 +1,9 @@
 ## Script is adapted from Baek et al (2023). Lonely individuals process the world in idiosyncratic ways. Psychological Science, 34(6), 683-695.
 rm(list = ls())#clear
 
-setwd("E:/Cartoon/LME/Data")
-Euc <- read.csv("NetworkEuclidean_dele48.csv")
-PTData <- read.csv("PT_dele48.csv")
+setwd("/.../Data")
+Euc <- read.csv("NetworkEuclidean.csv")
+PTData <- read.csv("PT.csv")
 n_unique_dyad <- 1485 #input the number of unique dyads in dataset
 
 #Grouping based on high and low median
@@ -24,7 +24,6 @@ PTData_dyad$dyad_PT_binary <- ifelse(PTData_dyad$sub1_PT_binary==c("low") &
 #Merge dyad-level dataframes together:
 Euc_dyad <- merge(Euc, PTData_dyad, by = c("sub1", "sub2"))
 
-
 #Create doubled dataframes (adding redundancy) to allow fully-crossed random effects :
 library(DescTools)
 Euc_dyad_2 <- Euc_dyad
@@ -37,19 +36,12 @@ Euc_dyad_double <- rbind(Euc_dyad, Euc_dyad_2)
 library(emmeans)
 library(lmerTest)
 
-emm_options(pbkrtest.limit = 3000)
-emm_options(lmerTest.limit = 3000)
-
-md <- lmer(scale(Euc) ~ dyad_PT_binary + (1 | sub1) + (1 | sub2), data = Euc_dyad_double)
-emm_md <- emmeans(md, ~ dyad_PT_binary, contr = Contrasts, adjust = "none")
-
-
 # Set contrasts:
 Contrasts <- list(HHvsLL = c(1, 0, -1),
                   HHvsLH = c(1, -1, 0),
                   LHvsLL = c(0, 1, -1))
 
-dyad_Euc_IDC_bin <- function(data)
+dyad_Euc_PT_bin <- function(data)
 {
   md <- (lmer(scale(Euc) ~ dyad_PT_binary + (1|sub1) + (1|sub2), data))
   emm_md <- emmeans(md, ~ dyad_PT_binary, contr = Contrasts, adjust = "none")
@@ -84,7 +76,7 @@ dyad_Euc_IDC_bin <- function(data)
 }
 
 library(plyr)
-dyad_Euc_IDC_results_bin <- ddply(Euc_dyad_double, .(Network), dyad_Euc_IDC_bin)
+dyad_Euc_PT_results_bin <- ddply(Euc_dyad_double, .(Network), dyad_Euc_PT_bin)
 
 
 #Function to rearrange data:
@@ -111,7 +103,6 @@ func_rearrange <- function(data){
   return(new_data)
 }
 
+dyad_Euc_PT_results_bin <- func_rearrange(dyad_Euc_PT_results_bin)
 
-
-dyad_Euc_IDC_results_bin <- func_rearrange(dyad_Euc_IDC_results_bin)
-
+dyad_Euc_PT_results_bin

@@ -1,6 +1,6 @@
 clear;clc;
 %%
-RawPath = 'E:\Cartoon\...\NetworkBoldData.mat';
+RawPath = '\...\NetworkBoldData.mat';
 load(RawPath);
 Network = {'MTN'};
 RawData = NetworkBoldData{1};
